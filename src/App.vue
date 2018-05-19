@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <app-top-bar @theme="theme($event)"></app-top-bar>
+    <div class="main-panel">
+      <app-main></app-main>
+    </div>
   </div>
 </template>
 
 <script>
 import Themes from "./assets/json/themes";
+import Main from "./components/Main";
 import TopBar from "./components/TopBar";
 
 export default {
   components: {
-    AppTopBar: TopBar
+    AppTopBar: TopBar,
+    AppMain: Main
   },
   methods: {
     theme(id) {
@@ -35,5 +40,10 @@ body {
   background-color: var(--back-color);
   -webkit-transition: 0.1s;
   transition: 0.1s;
+
+  .main-panel {
+    margin: 100px auto;
+    width: 75%;
+  }
 }
 </style>
