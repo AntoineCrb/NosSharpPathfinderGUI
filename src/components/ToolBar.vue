@@ -3,12 +3,17 @@
       <div class="input" v-for="i in Object.keys(options.input)" :key="i">{{i}} : <input v-model="options.input[i]" type="input" size="10"></div>
       <button v-for="b in options.button" :key="b" @click="Emit(b)">{{b}}</button>
 
+      Maps : 
+      <select v-model="options.selected.mapId">
+         <option v-for="id in maps" :key="id" class="button-type">{{id}}</option>
+      </select>
+
       <div class="select-type">
-            <div class="block-color" :style="{'background-color': options.selected.nodeType.color }"></div>
-            <select v-model="options.selected.nodeType">
-               <option v-for="n in nodeTypes.filter(n => !n.special)" :key="n.id" :value="n" class="button-type">{{n.name}}</option>
-            </select>
-         </div>
+         <div class="block-color" :style="{'background-color': options.selected.nodeType.color }"></div>
+         <select v-model="options.selected.nodeType">
+            <option v-for="n in nodeTypes.filter(n => !n.special)" :key="n.id" :value="n" class="button-type">{{n.name}}</option>
+         </select>
+      </div>
 
       time : {{options.time}}ms
       <br>
@@ -18,7 +23,7 @@
 
 <script>
 export default {
-  props: ["options", "nodeTypes"],
+  props: ["options", "nodeTypes", "maps"],
   data() {
     return {};
   },

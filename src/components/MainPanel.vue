@@ -3,6 +3,7 @@
      <app-tool-bar 
     :options="options"
     :nodeTypes="nodeType"
+    :maps="mapsId"
     @updated="options = $event"
     ></app-tool-bar>
     <app-grid-panel
@@ -17,6 +18,7 @@
 <script>
 import options from "../assets/json/options";
 import nodeType from "../assets/json/nodeType";
+import maps from "../assets/json/maps";
 
 import node from "../objects/node";
 
@@ -28,6 +30,8 @@ export default {
     return {
       options,
       nodeType,
+      maps,
+      mapsId: [],
       grid: []
     };
   },
@@ -49,6 +53,38 @@ export default {
           this.grid.push(new node(x, y));
         }
       }
+    },
+    selectMap(id) {
+      this.grid = [];
+      var map = this.maps.find(m => m.id == id);
+      var y = 0;
+      var x = 0;
+
+      map.nodes.split("").forEach(v => {
+        switch (v) {
+          case "0":
+          case "1":
+            var n = new node(x, y);
+            n.type = Number(v);
+            this.grid.push(n);
+            y++;
+            break;
+
+          case "|":
+            y = 0;
+            x++;
+            break;
+        }
+      });
+      this.options.input.x = x;
+      this.options.input.y = y;
+    }
+  },
+  watch: {
+    "options.selected.mapId"(newId, oldId) {
+      if (newId) {
+        this.selectMap(newId);
+      }
     }
   },
   created() {
@@ -56,6 +92,7 @@ export default {
   },
   mounted() {
     this.getGrid();
+    maps.forEach(m => this.mapsId.push(m.id));
   },
   components: {
     AppToolBar: ToolBar,
