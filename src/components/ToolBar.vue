@@ -3,6 +3,11 @@
       <div class="input" v-for="i in Object.keys(options.input)" :key="i">{{i}} : <input v-model="options.input[i]" type="input" size="10"></div>
       <button v-for="b in options.button" :key="b" @click="Emit(b)">{{b}}</button>
 
+      Pathfinder : 
+      <select v-model="options.selected.pathfinder">
+         <option v-for="p in pathfinders" :key="p" :value="p" class="button-type">{{p}}</option>
+      </select>
+
       Maps : 
       <select v-model="options.selected.mapId">
          <option v-for="id in maps" :key="id" class="button-type">{{id}}</option>
@@ -23,7 +28,7 @@
 
 <script>
 export default {
-  props: ["options", "nodeTypes", "maps"],
+  props: ["options", "nodeTypes", "maps", "pathfinders"],
   data() {
     return {};
   },
