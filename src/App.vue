@@ -2,20 +2,20 @@
   <div id="app">
     <app-top-bar @theme="theme($event)"></app-top-bar>
     <div class="main-panel">
-      <app-main></app-main>
+      <app-main-panel></app-main-panel>
     </div>
   </div>
 </template>
 
 <script>
 import Themes from "./assets/json/themes";
-import Main from "./components/Main";
+import MainPanel from "./components/MainPanel";
 import TopBar from "./components/TopBar";
 
 export default {
   components: {
     AppTopBar: TopBar,
-    AppMain: Main
+    AppMainPanel: MainPanel
   },
   methods: {
     theme(id) {
