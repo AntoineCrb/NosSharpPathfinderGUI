@@ -2,6 +2,14 @@
    <div class="toolbar">
       <div class="input" v-for="i in Object.keys(options.input)" :key="i">{{i}} : <input v-model="options.input[i]" type="input" size="10"></div>
       <button v-for="b in options.button" :key="b" @click="Emit(b)">{{b}}</button>
+
+      <div class="select-type">
+            <div class="block-color" :style="{'background-color': options.selected.nodeType.color }"></div>
+            <select v-model="options.selected.nodeType">
+               <option v-for="n in nodeTypes.filter(n => !n.special)" :key="n.id" :value="n" class="button-type">{{n.name}}</option>
+            </select>
+         </div>
+
       time : {{options.time}}ms
       <br>
       nodes : {{options.nodes}}
@@ -10,7 +18,7 @@
 
 <script>
 export default {
-  props: ["options"],
+  props: ["options", "nodeTypes"],
   data() {
     return {};
   },

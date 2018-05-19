@@ -1,7 +1,8 @@
 <template>
    <div class="main">
      <app-tool-bar 
-    :options="options" 
+    :options="options"
+    :nodeTypes="nodeType"
     @updated="options = $event"
     ></app-tool-bar>
    </div>
@@ -9,13 +10,19 @@
 
 <script>
 import options from "../assets/json/options";
+import nodeType from "../assets/json/nodeType";
+
 import ToolBar from "./ToolBar.vue";
 
 export default {
   data() {
     return {
-      options
+      options,
+      nodeType
     };
+  },
+  created() {
+    this.options.selected.nodeType = nodeType[0];
   },
   components: {
     AppToolBar: ToolBar

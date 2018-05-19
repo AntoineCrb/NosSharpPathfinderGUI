@@ -1,0 +1,38 @@
+[{
+    "id": 0,
+    "name": "Open",
+    "color": "#fff",
+    "single": false
+  }, {
+    "id": 1,
+    "name": "Wall",
+    "color": "rgb(0,0,0)",
+    "single": false
+  },
+  {
+    "id": 2,
+    "name": "Start",
+    "color": "rgb(50,200,50)",
+    "single": true
+  },
+  {
+    "id": 3,
+    "name": "End",
+    "color": "rgb(200,50,50)",
+    "single": true
+  },
+  {
+    "id": 4,
+    "name": "Path",
+    "color": "rgb(250, 160, 0)",
+    "single": false,
+    "special": true
+  },
+  {
+    "id": 5,
+    "name": "Checked",
+    "color": "rgb(0, 150, 255)",
+    "single": false,
+    "special": true
+  }
+]

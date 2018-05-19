@@ -1,13 +1,12 @@
 {
-    "time": 0,
-    "nodes": 0,
-    "input": {
-      "x": 10,
-      "y": 10
-    },
-    "button": ["reload", "findPath"],
-    "selected": {
-
-    }
+  "time": 0,
+  "nodes": 0,
+  "input": {
+    "x": 10,
+    "y": 10
+  },
+  "button": ["reload", "findPath"],
+  "selected": {
+    "nodeType": null
   }
-  
+}
