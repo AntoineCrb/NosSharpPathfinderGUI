@@ -1,0 +1,44 @@
+[{
+
+    "id": 0,
+    "name": "standard",
+    "colors": [{
+        "text": "--text-color",
+        "value": "#2c3e50"
+      },
+      {
+        "text": "--panel-color",
+        "value": "#f6f6f6"
+      },
+      {
+        "text": "--back-color",
+        "value": "#ffffff"
+      },
+      {
+        "text": "--border-color",
+        "value": "#dbdbdb"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "dark",
+    "colors": [{
+        "text": "--text-color",
+        "value": "#cccac8"
+      },
+      {
+        "text": "--panel-color",
+        "value": "#202020"
+      },
+      {
+        "text": "--back-color",
+        "value": "#171717"
+      },
+      {
+        "text": "--border-color",
+        "value": "#242424"
+      }
+    ]
+  }
+]
