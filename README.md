@@ -1,8 +1,5 @@
 # NosSharpPathfinderGUI
 
-<img src="docs/maze.png" height="500px"></img>
-<img src="docs/maze2.png" height="500px"></img>
-
 [![forthebadge](https://forthebadge.com/images/badges/made-with-vue.svg)](https://forthebadge.com)
 
 ## Description
@@ -21,3 +18,8 @@ npm run dev
 # build for production with minification
 npm run build
 ```
+
+## ScreenShots
+
+<img src="docs/maze.png" height="800px"></img>
+<img src="docs/maze2.png" height="800px"></img>
