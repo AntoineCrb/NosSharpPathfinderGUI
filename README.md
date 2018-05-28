@@ -1,6 +1,13 @@
-# nossharppathfindergui
+# NosSharpPathfinderGUI
 
-> A project made in VueJs, graphical interface designed to test different pathfinder algorithms
+<img src="docs/maze.png" height="500px"></img>
+<img src="docs/maze2.png" height="500px"></img>
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-vue.svg)](https://forthebadge.com)
+
+## Description
+
+NosSharpPathfinderGUI is a graphical interface made with VueJS that allows you to test different pathfinder algorithms on nostale maps
 
 ## Build Setup
 
@@ -14,5 +21,3 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
