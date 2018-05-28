@@ -5,7 +5,7 @@
         <a class="text">Nos#PathfinderGUI</a>
       </div>
 
-      <div class="switch">
+      <div class="switch"> <!-- The switcher is from codepen : https://codepen.io/stefgeraets/pen/ExfBd -->
         <input type="checkbox" name="toggle" v-model="theme">
         <label for="toggle"><i></i></label>
         <span></span>

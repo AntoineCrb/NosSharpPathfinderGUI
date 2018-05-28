@@ -1,8 +1,8 @@
 <template>
   <div class="panel" :style="{'height': `${grid.length > 1 ? grid[grid.length-1].y * 6 + 20 : 30}px`}" 
-      @mousedown="isClicking = true" @mouseleave="isClicking = false" @mouseup="isClicking = false"> <!-- Create -->
+      @mousedown="isClicking = true" @mouseleave="isClicking = false" @mouseup="isClicking = false"> <!-- select the nodes when the click is maintained -->
       <div class="block-panel">
-         <div v-for="n in grid" 
+         <div v-for="n in grid"
             :key="n.id" class="block"
             @mouseover="selectNode(n)"
             @click="selectNode(n, true)"

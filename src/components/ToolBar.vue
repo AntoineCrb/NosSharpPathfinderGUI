@@ -1,25 +1,27 @@
 <template>
    <div class="toolbar">
-      <div class="input" v-for="i in Object.keys(options.input)" :key="i">{{i}} : <input v-model="options.input[i]" type="input" size="10"></div>
-      <button v-for="b in options.button" :key="b" @click="Emit(b)">{{b}}</button>
-
+      <div class="input" v-for="i in options.input" :key="i.name">{{i.name}} : <input v-model="i.value" :type="i.type" size="10"></div>
+      <button v-for="b in options.button" :key="b" @click="Emit(b)" class="button">{{b}}</button>
+      <br>
       Pathfinder : 
       <select v-model="options.selected.pathfinder">
          <option v-for="p in pathfinders" :key="p" :value="p" class="button-type">{{p}}</option>
       </select>
-
+      Heuristic : 
+      <select v-model="options.selected.heuristic">
+         <option v-for="h in heuristics" :key="h.name" :value="h" class="button-type">{{h.name}}</option>
+      </select>
       Maps : 
       <select v-model="options.selected.mapId">
          <option v-for="id in maps" :key="id" class="button-type">{{id}}</option>
       </select>
-
+      <br>
       <div class="select-type">
          <div class="block-color" :style="{'background-color': options.selected.nodeType.color }"></div>
          <select v-model="options.selected.nodeType">
             <option v-for="n in nodeTypes.filter(n => !n.special)" :key="n.id" :value="n" class="button-type">{{n.name}}</option>
          </select>
       </div>
-
       time : {{options.time}}ms
       <br>
       nodes : {{options.nodes}}
@@ -28,7 +30,7 @@
 
 <script>
 export default {
-  props: ["options", "nodeTypes", "maps", "pathfinders"],
+  props: ["options", "nodeTypes", "maps", "pathfinders", "heuristics"],
   data() {
     return {};
   },
@@ -42,15 +44,23 @@ export default {
 
 <style lang="scss" scoped>
 .toolbar {
-  height: 100px;
+  min-height: 100px;
   border-bottom: 2px solid;
   border-color: var(--border-color);
   overflow: hidden;
   padding: 10px;
 
+  input {
+    vertical-align: middle;
+  }
+
   .input {
     display: inline-block;
     padding-right: 15px;
+  }
+
+  .button {
+    float: right;
   }
 
   .select-type {

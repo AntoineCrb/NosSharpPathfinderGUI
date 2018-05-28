@@ -5,6 +5,7 @@
     :pathfinders="Object.keys(pathfinders)"
     :nodeTypes="nodeType"
     :maps="mapsId"
+    :heuristics="heuristics"
     @updated="options = $event"
     @reload="getGrid"
     @findPath="findPath"
@@ -25,7 +26,7 @@ import maps from "../assets/json/maps";
 
 import node from "../objects/node";
 import pathfinders from "../pathfinders/";
-
+import heuristics from "../pathfinders/helpers/heuristic";
 import GridPanel from "./GridPanel.vue";
 import ToolBar from "./ToolBar.vue";
 
@@ -36,6 +37,7 @@ export default {
       nodeType,
       pathfinders,
       maps,
+      heuristics,
       mapsId: [],
       grid: []
     };
@@ -43,18 +45,23 @@ export default {
   methods: {
     selectNode(node) {
       let currentType = this.options.selected.nodeType;
-      let oldNode = currentType.single
+      let oldNode = currentType.single // Check if there is a node with the same type and if the type has to be single ex : Start/End
         ? this.grid.find(n => n.type == currentType.id)
         : null;
       if (oldNode) {
-        oldNode.type = 0;
+        oldNode.type = 0; // default type (Open)
       }
       node.type = currentType.id;
     },
     getGrid() {
+      if (this.options.selected.mapId) {
+        this.selectMap(this.options.selected.mapId);
+        return;
+      }
       this.grid = [];
-      for (var x = 0; x < this.options.input.x; x++) {
-        for (var y = 0; y < this.options.input.y; y++) {
+      this.options.selected.mapId = null;
+      for (var x = 0; x < this.findInput("x").value; x++) {
+        for (var y = 0; y < this.findInput("y").value; y++) {
           this.grid.push(new node(x, y));
         }
       }
@@ -62,8 +69,8 @@ export default {
     selectMap(id) {
       this.grid = [];
       var map = this.maps.find(m => m.id == id);
-      var y = 0;
-      var x = 0;
+      var y = 0,
+        x = 0;
 
       map.nodes.split("").forEach(v => {
         switch (v) {
@@ -81,8 +88,8 @@ export default {
             break;
         }
       });
-      this.options.input.x = x;
-      this.options.input.y = y;
+      this.findInput("x").value = x;
+      this.findInput("y").value = y;
     },
     findPath() {
       this.clearPath();
@@ -90,26 +97,34 @@ export default {
         alert("You have to select a pathfinder.");
         return;
       }
-      // start & end
-      if (
-        !this.grid.find(n => n.type == 2) ||
-        !this.grid.find(n => n.type == 3)
-      ) {
+      if (!this.options.selected.heuristic) {
+        alert("You have to select a heuristic");
+        return;
+      }
+
+      let start = this.grid.find(n => n.type == 2);
+      let end = this.grid.find(n => n.type == 3);
+
+      if (!start || !end) {
         alert("You have to select the start and the end.");
         return;
       }
 
-      let start = Date.now();
-      var path = this.pathfinders[this.options.selected.pathfinder].getPath(
+      let time = Date.now();
+      let path = this.pathfinders[this.options.selected.pathfinder].getPath(
         this.grid,
-        this.grid.find(n => n.type == 2),
-        this.grid.find(n => n.type == 3)
+        start,
+        end,
+        this.options.selected.diag,
+        this.options.selected.heuristic
       );
-      this.options.time = Date.now() - start;
-      if (path[0].length == 0) {
+
+      this.options.time = Date.now() - time;
+      if (path.length < 1) {
         alert("Impossible path.");
         return;
       }
+
       this.options.nodes = path[0].length;
       path[1].forEach(n => {
         this.grid[n.x * (this.grid[this.grid.length - 1].y + 1) + n.y].type =
@@ -125,6 +140,9 @@ export default {
       this.grid.forEach(
         n => (n.type = n.type == 4 || n.type == 5 ? 0 : n.type)
       );
+    },
+    findInput(name) {
+      return this.options.input.find(i => i.name == name);
     }
   },
   watch: {

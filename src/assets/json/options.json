@@ -1,14 +1,27 @@
 {
   "time": 0,
   "nodes": 0,
-  "input": {
-    "x": 10,
-    "y": 10
-  },
+  "input": [{
+      "name": "Allow diagonal",
+      "value": true,
+      "type": "checkbox"
+    }, {
+      "name": "x",
+      "value": 10,
+      "type": "input"
+    },
+    {
+      "name": "y",
+      "value": 10,
+      "type": "input"
+    }
+  ],
   "button": ["reload", "findPath"],
   "selected": {
     "pathfinder": null,
     "nodeType": null,
-    "mapId": null
+    "mapId": null,
+    "diag": true,
+    "heuristic": null
   }
 }
